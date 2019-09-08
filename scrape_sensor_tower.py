@@ -78,10 +78,10 @@ def extract_interesting_fields(app):
         # About
         'id': app['id'],
         'name': app['name'],
-        'categories': [
+        'categories': ', '.join({
             category_by_id(category_id)
             for category_id in app['categories']
-        ],
+        }),
         'url': app['url'],
         # Quality
         'rating': app['rating'],
@@ -89,10 +89,7 @@ def extract_interesting_fields(app):
         'ratings_current_version': app['rating_count_for_current_version'],
         # Revenue
         'monthly_downloads': app['humanized_worldwide_last_month_downloads']['downloads'],
-        'monthly_revenue': (
-            # break ties between revenue estimates using rank
-            app['humanized_worldwide_last_month_revenue']['revenue'] - app['rank']
-        ),
+        'monthly_revenue': app['humanized_worldwide_last_month_revenue']['revenue'],
         # Miscellaneous
         'buys_ads': app['buys_ads'],
         'shows_ads': app['shows_ads'],
